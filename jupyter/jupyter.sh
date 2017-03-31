@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+# metadata part can be replaced by parsing 
+# gcloud compute instances describe cluster-1-m 
+# The following way of reading metadata must be within the instance
+
 ROLE=$(curl -f -s -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
 INIT_ACTIONS_REPO=$(curl -f -s -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/INIT_ACTIONS_REPO || true)
 INIT_ACTIONS_REPO="${INIT_ACTIONS_REPO:-https://github.com/GoogleCloudPlatform/dataproc-initialization-actions.git}"
